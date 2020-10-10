@@ -26,7 +26,7 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
 	  
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  driver.manage().window().maximize();
-	  driver.get("http://live.demoguru99.com/index.php/customer/account/create/");
+	  driver.get("http://live.demoguru99.com/index.php/customer/account/create");
 	  
 	  emailAddress = "autotesting" + rand.nextInt(999999) + "@gmail.com" ;
 	  firstName = "Automation_Helen";
