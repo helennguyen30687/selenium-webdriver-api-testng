@@ -1,7 +1,7 @@
 package webdriver;
 
 import java.util.List;
-import java.util.Random;
+//import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -17,7 +17,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.sun.swing.internal.plaf.metal.resources.metal;
+//import com.sun.swing.internal.plaf.metal.resources.metal;
 
 public class Topic_07_Custom_Dropdown_List {
 

@@ -113,7 +113,7 @@ public class Topic_10_User_Interaction_Part_II {
 		sleepInSecond(4);
 		//A->B
 		dragAndDropHTML5ByOffset("//div[@id='column-a']", "//div[@id='column-b']");
-		sleepInSecond(3);
+		sleepInSecond(10);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='column-a']/header[text()='B']")).isDisplayed());
 	
 		//B->A

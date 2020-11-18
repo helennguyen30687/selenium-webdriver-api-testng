@@ -18,6 +18,10 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
 	WebDriver driver;
 	Random rand;
 	String emailAddress,firstName, lastName;
+	By emailTextboxBy = By.id("email");
+	By passwordTextboxBy = By.name("login[password]");
+	By myAccountLinkBy = By.xpath("//div[@class='footer']//a[text()='My Account']");
+	By logInButtonBy = By.id("send2");
 	
   @BeforeClass
   public void beforeClass() {
@@ -26,7 +30,7 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
 	  
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  driver.manage().window().maximize();
-	  driver.get("http://live.demoguru99.com/index.php/customer/account/create");
+	  driver.get("http://live.demoguru99.com/index.php/customer/account/create/");
 	  
 	  emailAddress = "autotesting" + rand.nextInt(999999) + "@gmail.com" ;
 	  firstName = "Automation_Helen";
@@ -37,11 +41,10 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
   public void TC_01_Login_Empty_Email_And_Password() {
 	  //Click vao My Account link
 
-	  driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
-	
-	 driver.findElement(By.id("email")).sendKeys("");
-	 driver.findElement(By.name("login[password]")).sendKeys("");
-	 driver.findElement(By.id("send2")).click();
+	 driver.findElement(myAccountLinkBy).click();
+	 driver.findElement(emailTextboxBy).sendKeys("");
+	 driver.findElement(passwordTextboxBy).sendKeys("");
+	 driver.findElement(logInButtonBy).click();
 	 //kiem tra validation message
 	
 	 Assert.assertEquals(driver.findElement(By.id("advice-required-entry-email")).getText(),"This is a required field.");
@@ -50,29 +53,29 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
   @Test
   public void TC_02_Login_Invalid_Email() {
 	  
-	  driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
-		 driver.findElement(By.id("email")).sendKeys("12341234@123456");
-		 driver.findElement(By.name("login[password]")).sendKeys("123456");
-		 driver.findElement(By.id("send2")).click();
+	     driver.findElement(myAccountLinkBy).click();
+		 driver.findElement(emailTextboxBy).sendKeys("12341234@123456");
+		 driver.findElement(passwordTextboxBy).sendKeys("123456");
+		 driver.findElement(logInButtonBy).click();
 		 
 		 Assert.assertEquals(driver.findElement(By.id("advice-validate-email-email")).getText(), "Please enter a valid email address. For example johndoe@domain.com.");
   }
   @Test
   public void TC_03_Login_Invalid_Password() {
 		
-		  driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
-		  driver.findElement(By.id("email")).sendKeys("automation@gmail.com"); 
-		  driver.findElement(By.name("login[password]")).sendKeys("123"); 
-		  driver.findElement(By.id("send2")).click();
+		  driver.findElement(myAccountLinkBy).click();
+		  driver.findElement(emailTextboxBy).sendKeys("automation@gmail.com"); 
+		  driver.findElement(passwordTextboxBy).sendKeys("123"); 
+		  driver.findElement(logInButtonBy).click();
 		  Assert.assertEquals(driver.findElement(By.id("advice-validate-password-pass")).getText(), "Please enter 6 or more characters without leading or trailing spaces.");
 		   }
   @Test
   public void TC_04_Login_Incorrect_Email_Or_Password() {
 		
-		 driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click(); 
-		 driver.findElement(By.id("email")).sendKeys("automation@gmail.com");
-		  driver.findElement(By.name("login[password]")).sendKeys("123123123");
-		  driver.findElement(By.id("send2")).click();
+		 driver.findElement(myAccountLinkBy).click(); 
+		 driver.findElement(emailTextboxBy).sendKeys("automation@gmail.com");
+		  driver.findElement(passwordTextboxBy).sendKeys("123123123");
+		  driver.findElement(logInButtonBy).click();
 		Assert.assertEquals(driver.findElement(By.xpath("//li[@class='error-msg']//span")).getText(), "Invalid login or password.");
 		
 		 
@@ -80,7 +83,7 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
   @Test
   public void TC_05_Register_To_System() {
 		
-		 driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
+		 driver.findElement(myAccountLinkBy).click();
 		 driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
 		 
 		 driver.findElement(By.id("firstname")).sendKeys(firstName);
@@ -105,16 +108,16 @@ public class Topic_02_Xpath_Css_Part_II_FindElement {
   @Test
   public void TC_06_Login_Valid_Email_And_Password() {
 		
-		 driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click(); 
+		 driver.findElement(myAccountLinkBy).click(); 
 		
-		 driver.findElement(By.id("email")).sendKeys(emailAddress);
-		  driver.findElement(By.name("login[password]")).sendKeys("123456");
+		 driver.findElement(emailTextboxBy).sendKeys(emailAddress);
+		  driver.findElement(passwordTextboxBy).sendKeys("123456");
 		  
-		  driver.findElement(By.id("send2")).click();
+		  driver.findElement(logInButtonBy).click();
 		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='welcome-msg']//strong")).getText(), "Hello, " + firstName + " " +lastName +"!");
 		
 		 
-		   }
+		   } 
   @AfterClass
   public void afterClass() {
   }
