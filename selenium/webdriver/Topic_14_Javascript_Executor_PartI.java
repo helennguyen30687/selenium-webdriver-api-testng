@@ -3,6 +3,7 @@ package webdriver;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.bouncycastle.asn1.x509.GeneralName;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -123,16 +124,31 @@ public class Topic_14_Javascript_Executor_PartI {
 		sleepInSecond(3);
 		
 		//click Create an account button to go to sign up (JE)
-		
+		highlightElement("//a[@title='Create an Account']//span[text()='Create an Account']");
+
+		clickToElementByJS("//a[@title='Create an Account']//span[text()='Create an Account']");
 		//Input valid data in to all field: First name, last name, email address, pwd, confirm pwd (JE)
+		highlightElement("//input[@id='firstname']");
+		sendkeyToElementByJS("//input[@id='firstname']", "Nguyen");
+		highlightElement("//input[@id='lastname']");
+		sendkeyToElementByJS("//input[@id='lastname']", "Helen");
+		highlightElement("//input[@id='email_address']");
+		sendkeyToElementByJS("//input[@id='email_address']", generateEmail());
+		highlightElement("//input[@id='password']");
+		sendkeyToElementByJS("//input[@id='password']", "123456");
+		highlightElement("//input[@id='confirmation']");
+		sendkeyToElementByJS("//input[@id='confirmation']", "123456");
 		
 		//Click register button (JE)
-		
+		highlightElement("//button[@title='Register']");
+		clickToElementByJS("//button[@title='Register']");
 		//verify message displayed when register successfully : Thank...
-		
+		Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']")).getText(),"Thank you for registering with Main Website Store.");
 		// logout (JE) 
-		
-		//Check navifate to home page after logging in successfully (isDisplayed to check wait)
+		clickToElementByJS("//div[@id ='header-account']//a[@title='Log Out']");
+
+		//Check navigate to home page after logging in successfully (isDisplayed to check wait)
+		Assert.assertTrue(driver.findElement(By.xpath("//img[@title='Additional Options']")).isDisplayed());
 	}
 	public Object executeForBrowser(String javaScript) {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
